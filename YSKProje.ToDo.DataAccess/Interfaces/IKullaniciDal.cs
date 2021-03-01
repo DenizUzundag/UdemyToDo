@@ -5,12 +5,12 @@ using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.DataAccess.Interfaces
 {
-    public interface IKullaniciDal
+    public interface IKullaniciDal:IGenericDal<Kullanici>
     {
-        void Kaydet(Kullanici tablo);
-        void Sil(Kullanici tablo);
-        void Guncelle(Kullanici tablo);
-        Kullanici GetirIdile(int id);
-        List<Kullanici> GetirHepsi();
+        //kullanıcıya özel metotları yazarız..
+
+        //kullanıcın tamamladığı ve tamamlamadığı işler
+
+
     }
 }

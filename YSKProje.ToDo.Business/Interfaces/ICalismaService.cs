@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using YSKProje.ToDo.Entities.Concrete;
 
-namespace YSKProje.ToDo.DataAccess.Interfaces
+namespace YSKProje.ToDo.Business.Interfaces
 {
-    public interface ICalismaDal:IGenericDal<Calisma>
+    public interface ICalismaService:IGenericService<Calisma>
     {
-      
     }
 }
