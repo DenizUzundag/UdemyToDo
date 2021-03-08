@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PageError</title>
+    <link href="~/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-danger lead"> Bir hata oluştu.</h1>
+        <h2 class="text-danger lead">@ViewBag.Code</h2>
+        <p class="p-2">
+            @ViewBag.ErrorMessage
+        </p>
+    </div>
+</body>
+</html>
+
