@@ -17,6 +17,11 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.Property(x => x.Aciklama).HasColumnType("ntext");
 
 
+            //gorevle aciliyet ilişkisi
+            //birden çoğa ilişki
+            builder.HasOne(I => I.Aciliyet).WithMany(I => I.Gorevler).HasForeignKey(I => I.AciliyetId);
+
+
         }
     }
 }

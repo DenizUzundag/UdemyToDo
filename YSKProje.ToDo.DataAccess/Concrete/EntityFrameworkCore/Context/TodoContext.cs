@@ -18,12 +18,18 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Context
         }
         // ilgili classlarımızı tablolarımızı belirtmiş olduk
      
-        public DbSet<Gorev> Calismalar { get; set; }
+        public DbSet<Gorev> Gorevler { get; set; }
+        public DbSet<Aciliyet> Aciliyetler { get; set; }
+        public DbSet<Rapor> Raporlar { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
           
             modelBuilder.ApplyConfiguration(new GorevMap());
+            modelBuilder.ApplyConfiguration(new AciliyetMap()); 
+            modelBuilder.ApplyConfiguration(new RaporMap()); 
+            modelBuilder.ApplyConfiguration(new AppUserMap());
+
             base.OnModelCreating(modelBuilder);
 
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Context;
 
 namespace YSKProje.ToDo.DataAccess.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20210320222240_CreateTableAciliyet")]
+    partial class CreateTableAciliyet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,8 +130,7 @@ namespace YSKProje.ToDo.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Tanim")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -193,8 +194,7 @@ namespace YSKProje.ToDo.DataAccess.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -217,8 +217,7 @@ namespace YSKProje.ToDo.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -275,34 +274,6 @@ namespace YSKProje.ToDo.DataAccess.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Gorevler");
-                });
-
-            modelBuilder.Entity("YSKProje.ToDo.Entities.Concrete.Rapor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Detay")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ntext");
-
-                    b.Property<int>("GorevId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Tanim")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GorevId");
-
-                    b.ToTable("Raporlar");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -366,23 +337,11 @@ namespace YSKProje.ToDo.DataAccess.Migrations
 
                     b.HasOne("YSKProje.ToDo.Entities.Concrete.AppUser", "AppUser")
                         .WithMany("Gorevler")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("AppUserId");
 
                     b.Navigation("Aciliyet");
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("YSKProje.ToDo.Entities.Concrete.Rapor", b =>
-                {
-                    b.HasOne("YSKProje.ToDo.Entities.Concrete.Gorev", "Gorev")
-                        .WithMany("Raporlar")
-                        .HasForeignKey("GorevId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gorev");
                 });
 
             modelBuilder.Entity("YSKProje.ToDo.Entities.Concrete.Aciliyet", b =>
@@ -393,11 +352,6 @@ namespace YSKProje.ToDo.DataAccess.Migrations
             modelBuilder.Entity("YSKProje.ToDo.Entities.Concrete.AppUser", b =>
                 {
                     b.Navigation("Gorevler");
-                });
-
-            modelBuilder.Entity("YSKProje.ToDo.Entities.Concrete.Gorev", b =>
-                {
-                    b.Navigation("Raporlar");
                 });
 #pragma warning restore 612, 618
         }
