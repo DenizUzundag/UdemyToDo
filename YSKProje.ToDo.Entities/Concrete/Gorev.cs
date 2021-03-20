@@ -7,7 +7,7 @@ using YSKProje.ToDo.Entities.Interfaces;
 
 namespace YSKProje.ToDo.Entities.Concrete
 {
-   public class Calisma:ITablo
+   public class Gorev:ITablo
     {
        
         public int Id { get; set; }
@@ -16,7 +16,6 @@ namespace YSKProje.ToDo.Entities.Concrete
 
         public bool Durum { get; set; }
         public DateTime OlusturulmaTarihi { get; set; }
-        public int KullaniciId { get; set; }
-        public Kullanici Kullanici { get; set; }
+     
     }
 }

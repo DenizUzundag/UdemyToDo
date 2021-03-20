@@ -5,7 +5,7 @@ using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Business.Interfaces
 {
-    public interface IKullaniciService:IGenericService<Kullanici>
+    public interface IGorevService:IGenericService<Gorev>
     {
     }
 }

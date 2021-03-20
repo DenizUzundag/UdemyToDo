@@ -7,7 +7,7 @@ using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
-    public class EfCalismaRepository : EfGenericRepository<Calisma>, ICalismaDal
+    public class EfGorevRepository : EfGenericRepository<Gorev>, IGorevDal
     {
        //ICalismaDalı yazmamızın sebebi calima ile ilgili özel bir mett varsa gelsin diye
     }

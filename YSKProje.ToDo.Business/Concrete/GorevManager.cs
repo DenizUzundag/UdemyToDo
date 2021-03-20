@@ -5,35 +5,35 @@ using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Business.Concrete
 {
-    public class CalismaManager:ICalismaService
+    public class GorevManager:IGorevService
     {
-        private readonly EfCalismaRepository efCalismaRepository;
-        public CalismaManager()
+        private readonly EfGorevRepository efCalismaRepository;
+        public GorevManager()
         {
-            efCalismaRepository = new EfCalismaRepository();
+            efCalismaRepository = new EfGorevRepository();
         }
-        public List<Calisma> GetirHepsi()
+        public List<Gorev> GetirHepsi()
         {
             return efCalismaRepository.GetirHepsi();
         }
 
-        public Calisma GetirIdile(int id)
+        public Gorev GetirIdile(int id)
         {
             return efCalismaRepository.GetirIdile(id);
 
         }
 
-        public void Guncelle(Calisma tablo)
+        public void Guncelle(Gorev tablo)
         {
             efCalismaRepository.Guncelle(tablo);
         }
 
-        public void Kaydet(Calisma tablo)
+        public void Kaydet(Gorev tablo)
         {
             efCalismaRepository.Kaydet(tablo);
         }
 
-        public void Sil(Calisma tablo)
+        public void Sil(Gorev tablo)
         {
             efCalismaRepository.Sil(tablo);
         }
