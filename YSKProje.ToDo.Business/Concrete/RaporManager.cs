@@ -3,40 +3,41 @@ using System.Collections.Generic;
 using System.Text;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
+using YSKProje.ToDo.DataAccess.Interfaces;
 using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Business.Concrete
 {
     public class RaporManager : IRaporService
     {
-        private readonly EfRaporRepository raporRepository;
-        public RaporManager()
+        private readonly IRaporDal _raporDal;
+        public RaporManager(IRaporDal raporDal)
         {
-            raporRepository = new EfRaporRepository();
+            _raporDal = raporDal;
         }
         public List<Rapor> GetirHepsi()
         {
-            return raporRepository.GetirHepsi();
+            return _raporDal.GetirHepsi();
         }
 
         public Rapor GetirIdile(int id)
         {
-            return raporRepository.GetirIdile(id);
+            return _raporDal.GetirIdile(id);
         }
 
         public void Guncelle(Rapor tablo)
         {
-            raporRepository.Guncelle(tablo);
+            _raporDal.Guncelle(tablo);
         }
 
         public void Kaydet(Rapor tablo)
         {
-            raporRepository.Kaydet(tablo);
+            _raporDal.Kaydet(tablo);
         }
 
         public void Sil(Rapor tablo)
         {
-            raporRepository.Sil(tablo);
+            _raporDal.Sil(tablo);
         }
     }
 }

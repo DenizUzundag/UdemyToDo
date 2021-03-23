@@ -14,7 +14,17 @@
     {
       "library": "jquery@3.4.1",
       "destination": "wwwroot/lib/jqyery/",
-      "files": ["jquery.min.js"]
+      "files": [ "jquery.min.js" ]
+    },
+    {
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/lib/jqueryValidate",
+      "files": [ "jquery.validate.min.js" ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jqueryUnob",
+      "files": ["jquery.validate.unobtrusive.min.js"]
     }
   ]
 }

@@ -3,40 +3,41 @@ using System.Collections.Generic;
 using System.Text;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
+using YSKProje.ToDo.DataAccess.Interfaces;
 using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Business.Concrete
 {
     public class AciliyetManager : IAciliyetService
     {
-        private readonly EfAciliyetRepository efAciliyetRepository;
-        public AciliyetManager()
+        private readonly IAciliyetDal _aciliyetDal;
+        public AciliyetManager(IAciliyetDal aciliyetDal)
         {
-            efAciliyetRepository = new EfAciliyetRepository();
+            _aciliyetDal = aciliyetDal;
         }
         public List<Aciliyet> GetirHepsi()
         {
-            return efAciliyetRepository.GetirHepsi();
+            return _aciliyetDal.GetirHepsi();
         }
 
         public Aciliyet GetirIdile(int id)
         {
-            return efAciliyetRepository.GetirIdile(id);
+            return _aciliyetDal.GetirIdile(id);
         }
 
         public void Guncelle(Aciliyet tablo)
         {
-            efAciliyetRepository.Guncelle(tablo);
+            _aciliyetDal.Guncelle(tablo);
         }
 
         public void Kaydet(Aciliyet tablo)
         {
-            efAciliyetRepository.Kaydet(tablo);
+            _aciliyetDal.Kaydet(tablo);
         }
 
         public void Sil(Aciliyet tablo)
         {
-            efAciliyetRepository.Sil(tablo);
+            _aciliyetDal.Sil(tablo);
         }
     }
 }
