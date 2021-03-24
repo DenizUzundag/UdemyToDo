@@ -13,12 +13,16 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
     public class AciliyetController : Controller
     {
         private readonly IAciliyetService _aciliyetService;
+       
         public AciliyetController(IAciliyetService aciliyetService)
         {
             _aciliyetService = aciliyetService;
         }
         public IActionResult Index()
         {
+
+            //active bilgimizin taşınması
+            TempData["Active"] = "aciliyet";
 
             //aciliyetlerin listelenmesi
 
@@ -37,6 +41,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult EkleAciliyet()
         {
+            TempData["Active"] = "aciliyet";
             return View(new AciliyetAddViewModel());
         }
         
@@ -56,7 +61,8 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult GuncelleAciliyet(int id)
         {
-           var aciliyet = _aciliyetService.GetirIdile(id);
+            TempData["Active"] = "aciliyet";
+            var aciliyet = _aciliyetService.GetirIdile(id);
             AciliyetUpdateViewModel model = new AciliyetUpdateViewModel
             {
                 Id = aciliyet.Id,

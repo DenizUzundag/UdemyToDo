@@ -15,7 +15,7 @@ namespace YSKProje.ToDo.Entities.Concrete
         public string Aciklama { get; set; }
 
         public bool Durum { get; set; }
-        public DateTime OlusturulmaTarihi { get; set; }
+        public DateTime OlusturulmaTarihi { get; set; } = DateTime.Now;
 
 
         //bir gorev varsa bir kişi yapar bunu

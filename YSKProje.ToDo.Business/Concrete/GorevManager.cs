@@ -11,9 +11,15 @@ namespace YSKProje.ToDo.Business.Concrete
         private readonly IGorevDal _gorevDal;
         public GorevManager(IGorevDal gorevDal)
         {
-            _gorevDal = _gorevDal;
+            _gorevDal = gorevDal;
            
         }
+
+        public List<Gorev> GetirAciliyetIleTamamlanmayan()
+        {
+            return _gorevDal.GetirAciliyetIleTamamlanmayan();
+        }
+
         public List<Gorev> GetirHepsi()
         {
             return _gorevDal.GetirHepsi();

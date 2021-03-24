@@ -7,6 +7,10 @@ namespace YSKProje.ToDo.DataAccess.Interfaces
 {
     public interface IGorevDal:IGenericDal<Gorev>
     {
+
+        //goreve özgü
+
+        List<Gorev> GetirAciliyetIleTamamlanmayan();
      
     }
 }

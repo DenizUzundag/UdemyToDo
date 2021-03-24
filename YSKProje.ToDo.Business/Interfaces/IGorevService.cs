@@ -7,5 +7,6 @@ namespace YSKProje.ToDo.Business.Interfaces
 {
     public interface IGorevService:IGenericService<Gorev>
     {
+        List<Gorev> GetirAciliyetIleTamamlanmayan();
     }
 }
