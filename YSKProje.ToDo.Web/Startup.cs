@@ -62,6 +62,8 @@ namespace YSKProje.ToDo.Web
             }
             IdentityInitializer.SeedDate(userManager, roleManager).Wait();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseStaticFiles();//wwwroot
 
             app.UseEndpoints(endpoints =>
