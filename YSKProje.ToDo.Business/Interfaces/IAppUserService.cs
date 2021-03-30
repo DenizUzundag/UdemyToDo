@@ -5,9 +5,8 @@ using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Business.Interfaces
 {
-    public interface IGorevService:IGenericService<Gorev>
+    public interface IAppUserService
     {
-        List<Gorev> GetirAciliyetIleTamamlanmayan();
-        List<Gorev> GetirTumTablolarla();
+        List<AppUser> GetirAdminOlmayanlar();
     }
 }

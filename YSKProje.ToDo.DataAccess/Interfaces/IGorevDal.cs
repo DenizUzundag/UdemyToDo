@@ -11,6 +11,7 @@ namespace YSKProje.ToDo.DataAccess.Interfaces
         //goreve özgü
 
         List<Gorev> GetirAciliyetIleTamamlanmayan();
+        List<Gorev> GetirTumTablolarla();
      
     }
 }

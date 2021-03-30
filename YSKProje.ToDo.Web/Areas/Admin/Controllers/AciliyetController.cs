@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ using YSKProje.ToDo.Web.Areas.Admin.Models;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class AciliyetController : Controller
     {

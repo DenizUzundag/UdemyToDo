@@ -19,5 +19,15 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
             }
         }
+
+        public List<Gorev> GetirTumTablolarla()
+        {
+            using (var contex = new TodoContext())
+            {
+                return contex.Gorevler.Include(I => I.Aciliyet).Include(I=>I.Raporlar).Include(I=>I.AppUser)
+                    .Where(I => !I.Durum).OrderByDescending(I => I.OlusturulmaTarihi).ToList(); //durumu false olanlar gelsin olusturlma tarihine göre
+
+            }
+        }
     }
 }

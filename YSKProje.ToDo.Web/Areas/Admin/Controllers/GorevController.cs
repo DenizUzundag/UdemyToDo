@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ using YSKProje.ToDo.Web.Areas.Admin.Models;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class GorevController : Controller
     {

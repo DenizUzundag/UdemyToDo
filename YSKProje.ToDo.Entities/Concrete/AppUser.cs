@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using YSKProje.ToDo.Entities.Interfaces;
 
 namespace YSKProje.ToDo.Entities.Concrete
 {
-    public class AppUser:IdentityUser<int>//default string biz int primary key istiyoruz
+    public class AppUser:IdentityUser<int>,ITablo//default string biz int primary key istiyoruz
     {
         public string Name { get; set; }
         public string Surname { get; set; }
