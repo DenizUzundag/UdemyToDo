@@ -10,6 +10,7 @@ namespace YSKProje.ToDo.Entities.Concrete
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        public string Picture { get; set; }
         // bir userın birden fazla gorev olabilir liste olarak gorev alacagız
 
         public List<Gorev> Gorevler { get; set; }

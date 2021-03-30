@@ -109,5 +109,12 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        public IActionResult SilGorev(int id)
+        {
+            _gorevService.Sil(new Gorev { Id = id });
+            return RedirectToAction("Index");
+
+        }
+
     }
 }
