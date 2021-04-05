@@ -7,7 +7,7 @@
 <div class="row mt-2">
     <div class=" col-md-4">
 
-        <div class="card">
+        <div class="card border border-primary">
             <div class="card-header">
                 <h4 class="text-center lead pt-2"> Görev Bilgileri</h4>
             </div>
@@ -17,7 +17,7 @@
                     @Model.Aciklama
                 </p>
                 <p class="card-text">
-                    <strong>Aciliyet Durumu:</strong><span class="badge badge-info">@Model.Aciliyet.Tanim </span>
+                    <strong>Aciliyet Durumu:</strong><span class="badge badge-primary">@Model.Aciliyet.Tanim </span>
                 </p>
                 <p class="card-text">
                     <small>
@@ -45,6 +45,16 @@
                 </div>
             </div>
         }
+    <nav aria-label="Page navigation example">
+        @for (int i = 1; i <= ViewBag.ToplamSayfa; i++)
+        {
+            <!--Aktif sayfa ve toplam sayfa bilgisine sahip olmalıyız-->
+            <li class="page-item @(ViewBag.AktifSayfa ==i?"active":"")">
+                <a class="page-link" asp-action="AtaPersonel" asp-route-id="@Model.Id" asp-route-sayfa="@i">@i</a>
+            </li>
+        }
+
+    </nav>
 
     </div>
 
