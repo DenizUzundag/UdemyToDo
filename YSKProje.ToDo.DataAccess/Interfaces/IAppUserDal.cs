@@ -9,5 +9,6 @@ namespace YSKProje.ToDo.DataAccess.Interfaces
     {
         //bir appuser listesi alacağız
         List<AppUser> GetirAdminOlmayanlar();
+        List<AppUser> GetirAdminOlmayanlar(string aranacakKElime, int aktifSayfa = 1);
     }
 }

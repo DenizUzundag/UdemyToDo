@@ -15,6 +15,11 @@ namespace YSKProje.ToDo.Business.Concrete
            
         }
 
+        public Gorev GetirAciliyetileId(int id)
+        {
+            return _gorevDal.GetirAciliyetileId(id);
+        }
+
         public List<Gorev> GetirAciliyetIleTamamlanmayan()
         {
             return _gorevDal.GetirAciliyetIleTamamlanmayan();

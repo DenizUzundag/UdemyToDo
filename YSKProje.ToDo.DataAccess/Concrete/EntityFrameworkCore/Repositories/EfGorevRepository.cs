@@ -10,6 +10,12 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
     public class EfGorevRepository : EfGenericRepository<Gorev>, IGorevDal
     {
+        public Gorev GetirAciliyetileId(int id)
+        {
+            using var contex = new TodoContext();
+            return contex.Gorevler.Include(I => I.Aciliyet).FirstOrDefault(I => !I.Durum && I.Id == id); //durumu false olanlar gelsin olusturlma tarihine göre
+        }
+
         //ICalismaDalı yazmamızın sebebi calima ile ilgili özel bir mett varsa gelsin diye
         public List<Gorev> GetirAciliyetIleTamamlanmayan()
         {

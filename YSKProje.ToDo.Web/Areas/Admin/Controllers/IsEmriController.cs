@@ -42,5 +42,32 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             }
             return View(models);
         }
+        public IActionResult AtaPersonel(int id,string s,int sayfa=1)
+        {
+            TempData["Active"] = "isemri";
+            var gorev = _gorevService.GetirAciliyetileId(id);
+
+            var personeller = _appUserService.GetirAdminOlmayanlar(s, sayfa);
+            List<AppUSerListViewModel> appUserListmodel = new List<AppUSerListViewModel>();
+            foreach (var item in personeller)
+            {
+                AppUSerListViewModel model = new AppUSerListViewModel();
+                model.Id = item.Id;
+                model.Name = item.Name;
+                model.SurName = item.Surname;
+                model.Email = item.Email;
+                model.Picture = item.Picture;
+                appUserListmodel.Add(model);
+            }
+            ViewBag.Personeller = appUserListmodel;
+
+            GorevListViewModel gorevmodel = new GorevListViewModel();
+            gorevmodel.Id = gorev.Id;
+            gorevmodel.Ad = gorev.Ad;
+            gorevmodel.Aciklama = gorev.Aciklama;
+            gorevmodel.Aciliyet = gorev.Aciliyet;
+            gorevmodel.OlusturulmaTarihi = gorev.OlusturulmaTarihi;
+            return View(gorevmodel);
+        }
     }
 }

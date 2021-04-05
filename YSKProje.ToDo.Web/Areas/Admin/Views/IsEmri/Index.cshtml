@@ -8,12 +8,14 @@
 {
 <table class="table table-hover table-sm mt-2">
     <tr>
-        
-    <th>Ad</th>
-    <th>Aciklama</th>
-    <th>Oluşturulma Tarih</th>
-    <th>Çalışan Personel</th>
-    <th>Aciliyet</th>
+
+        <th>Ad</th>
+        <th>Aciklama</th>
+        <th>Oluşturulma Tarih</th>
+        <th>Çalışan Personel</th>
+        <th>Aciliyet</th>
+        <th>Rapor Sayısı</th>
+        <th>İşlem</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -22,26 +24,43 @@
             <td>@item.Aciklama</td>
             <td>@item.OlusturulmaTarihi.ToString("D")</td>
             <td>
-            @{
-                if(item.AppUser ==null)
-                {
-                    <span class="badge badge-danger">Çalışan personel yok</span>
+                @{
+                    if (item.AppUser == null)
+                    {
+                        <span class="badge badge-danger">Çalışan personel yok</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-success">@item.AppUser.Name çalışıyor</span>
+                    }
                 }
-                else
-                {
-                    <span class="badge badge-success">@item.AppUser.Name çalışıyor</span>
-                }
-            }
-            
-            
+
+
             </td>
             <td>
                 @item.Aciliyet.Tanim
             </td>
-        </tr>
-    }
 
-</table>
+            <td>
+                @item.Raporlar.Count
+            </td>
+            <td>
+                @{
+                    if (item.AppUser == null)
+                    {
+                        <a asp-action="AtaPersonel" asp-route-id="@item.Id" class="btn btn-info btn-sm">Personel ata</a>
+                    }
+                    else
+                    {
+                       <a asp-action="Detaylandir" asp-route-id="@item.Id" class="btn btn-info btn-sm">Detay Göster</a>
+                        }
+                    }
+
+            </td>
+        </tr>
+                }
+
+            </table>
 }
 else
 {
