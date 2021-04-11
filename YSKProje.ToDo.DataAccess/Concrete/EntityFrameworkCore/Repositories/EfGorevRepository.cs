@@ -26,6 +26,12 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             }
         }
 
+        public List<Gorev> GetirileAppUserId(int appUserId)
+        {
+            using var context = new TodoContext();
+            return context.Gorevler.Where(I => I.AppUserId == appUserId).ToList();
+        }
+
         public List<Gorev> GetirTumTablolarla()
         {
             using (var contex = new TodoContext())
