@@ -26,7 +26,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         {
             TempData["Active"] = "isemri";
             //var model = _appUserService.GetirAdminOlmayanlar();
-           List<Gorev>gorevler = _gorevService.GetirTumTablolarla();//liste olarak bir gorev listesi dönecek
+            List<Gorev>gorevler = _gorevService.GetirTumTablolarla();//liste olarak bir gorev listesi dönecek
             List<GorevListAllViewModel> models = new List<GorevListAllViewModel>();
             foreach (var item in gorevler)
             {
@@ -47,14 +47,15 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             TempData["Active"] = "isemri";
 
             ViewBag.AktifSayfa = sayfa;
-            ViewBag.ToplamSAyfa = (int)Math.Ceiling((double)_appUserService.GetirAdminOlmayanlar().Count / 3);//toplam sayfa
+            //ViewBag.ToplamSAyfa = (int)Math.Ceiling((double)_appUserService.GetirAdminOlmayanlar().Count / 3);//toplam sayfa
 
-
-
+            ViewBag.Aranan = s;
+            int toplamSayfa;
             var gorev = _gorevService.GetirAciliyetileId(id);
 
-         
-            var personeller = _appUserService.GetirAdminOlmayanlar(s, sayfa);
+
+            var personeller = _appUserService.GetirAdminOlmayanlar(out toplamSayfa,s,sayfa);
+            ViewBag.ToplamSayfa = toplamSayfa;
             List<AppUSerListViewModel> appUserListmodel = new List<AppUSerListViewModel>();
             foreach (var item in personeller)
             {

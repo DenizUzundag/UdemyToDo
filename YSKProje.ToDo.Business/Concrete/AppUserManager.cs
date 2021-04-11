@@ -19,9 +19,9 @@ namespace YSKProje.ToDo.Business.Concrete
             return _userDal.GetirAdminOlmayanlar();
         }
 
-        public List<AppUser> GetirAdminOlmayanlar(string aranacakKElime, int aktifSayfa)
+        public List<AppUser> GetirAdminOlmayanlar(out int toplamSayfa,string aranacakKElime, int aktifSayfa)
         {
-            return _userDal.GetirAdminOlmayanlar(aranacakKElime, aktifSayfa);
+            return _userDal.GetirAdminOlmayanlar(out toplamSayfa,aranacakKElime, aktifSayfa);
         }
     }
 }

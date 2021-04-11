@@ -33,8 +33,9 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             }).Where(I=>I.roles.Name=="Member").Select(I=>new AppUser()
             { 
                Id=I.user.Id,
-               Name=I.user.Surname,
-               Picture =I.user.Picture,
+                Name = I.user.Name,
+                Surname = I.user.Surname,
+                Picture =I.user.Picture,
                Email=I.user.Email,
                UserName =I.user.UserName
             }).ToList();
@@ -48,7 +49,7 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
 
         }
-        public List<AppUser> GetirAdminOlmayanlar(string aranacakKElime, int aktifSayfa = 1)
+        public List<AppUser> GetirAdminOlmayanlar(out int toplamSayfa, string aranacakKElime, int aktifSayfa = 1)
         {
 
             using var context = new TodoContext();
@@ -68,17 +69,21 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             }).Where(I => I.roles.Name == "Member").Select(I => new AppUser()
             {
                 Id = I.user.Id,
-                Name = I.user.Surname,
+                Name = I.user.Name,
+                Surname=I.user.Surname,
                 Picture = I.user.Picture,
                 Email = I.user.Email,
                 UserName = I.user.UserName
             });
-            if (string.IsNullOrWhiteSpace(aranacakKElime))//boşsa
+
+            toplamSayfa = (int)Math.Ceiling((double)result.Count()/3);
+            if (!string.IsNullOrWhiteSpace(aranacakKElime))//boşsa
             {
-                result.Where(I => I.Name.ToLower().Contains(aranacakKElime.ToLower()) || I.Surname.ToLower().Contains(aranacakKElime.ToLower()));
+               result = result.Where(I => I.Name.ToLower().Contains(aranacakKElime.ToLower()) || I.Surname.ToLower().Contains(aranacakKElime.ToLower()));
+                toplamSayfa = (int)Math.Ceiling((double)result.Count() / 3);
             }
 
-           result=  result.Skip((aktifSayfa - 1) * 3).Take(3);
+           result = result.Skip((aktifSayfa - 1) * 3).Take(3);
             return result.ToList();
 
 

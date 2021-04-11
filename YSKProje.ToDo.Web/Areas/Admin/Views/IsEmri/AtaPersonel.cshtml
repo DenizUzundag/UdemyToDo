@@ -2,9 +2,31 @@
 @{
     ViewData["Title"] = "AtaPersonel";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    string s = (string)ViewBag.Aranan;
 }
 
 <div class="row mt-2">
+    <div class="col-md-12 mb-2">
+
+
+        @if(!string.IsNullOrWhiteSpace(s))
+        {
+            <div class="border border-dark p-3 mb-2">
+                <strong>
+                    @s  
+                </strong>Kelimesi için sonuçları görüyorsunuz.
+                <a asp-action="AtaPersonel" asp-route-id="@Model.Id" class="float-right">Filtre Kaldır</a>
+
+
+            </div>
+        }
+
+        <form method="get" asp-action="AtaPersonel" class="text-right">
+            <input type="text" name="s" class="form-control-sm border-top-0 border-top-0 border-left-0 border-right-0 border-primary" />
+            <button type="submit" class="btn btn-primary btn-sm">Ara</button>
+
+        </form>
+    </div>
     <div class=" col-md-4">
 
         <div class="card border border-primary">
@@ -28,12 +50,15 @@
         </div>
     </div>
     <div class="col-md-8">
+
+
+
         @foreach (var item in (List<AppUSerListViewModel>)ViewBag.Personeller)
         {
-            <div class="card mb-3">
-                <div class="row g-0">
+            <div class="card border border-primary mb-3">
+                <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="~/img/@item.Picture" alt="@item.Name">
+                        <img src="~/img/@item.Picture" class="card-img" alt="@item.Name">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -45,16 +70,32 @@
                 </div>
             </div>
         }
-    <nav aria-label="Page navigation example">
-        @for (int i = 1; i <= ViewBag.ToplamSayfa; i++)
-        {
-            <!--Aktif sayfa ve toplam sayfa bilgisine sahip olmalıyız-->
-            <li class="page-item @(ViewBag.AktifSayfa ==i?"active":"")">
-                <a class="page-link" asp-action="AtaPersonel" asp-route-id="@Model.Id" asp-route-sayfa="@i">@i</a>
-            </li>
-        }
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (!string.IsNullOrWhiteSpace(s))
+                {
+                    @for (int i = 1; i <= ViewBag.ToplamSayfa; i++)
+                    {
+                        <!--Aktif sayfa ve toplam sayfa bilgisine sahip olmalıyız-->
+                        <li class="page-item @(ViewBag.AktifSayfa ==i?"active":"")">
+                            <a class="page-link" asp-action="AtaPersonel" asp-route-id="@Model.Id" asp-route-sayfa="@i" asp-route-s="@s">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    @for (int i = 1; i <= ViewBag.ToplamSayfa; i++)
+                    {
+                        <!--Aktif sayfa ve toplam sayfa bilgisine sahip olmalıyız-->
+                        <li class="page-item @(ViewBag.AktifSayfa ==i?"active":"")">
+                            <a class="page-link" asp-action="AtaPersonel" asp-route-id="@Model.Id" asp-route-sayfa="@i">@i</a>
+                        </li>
+                    }
+                }
 
-    </nav>
+            </ul>
+
+        </nav>
 
     </div>
 
