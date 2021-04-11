@@ -9,11 +9,11 @@
     <div class="col-md-12 mb-2">
 
 
-        @if(!string.IsNullOrWhiteSpace(s))
+        @if (!string.IsNullOrWhiteSpace(s))
         {
             <div class="border border-dark p-3 mb-2">
                 <strong>
-                    @s  
+                    @s
                 </strong>Kelimesi için sonuçları görüyorsunuz.
                 <a asp-action="AtaPersonel" asp-route-id="@Model.Id" class="float-right">Filtre Kaldır</a>
 
@@ -29,7 +29,7 @@
     </div>
     <div class=" col-md-4">
 
-        <div class="card border border-primary">
+        <div class="card border border-primary shadow">
             <div class="card-header">
                 <h4 class="text-center lead pt-2"> Görev Bilgileri</h4>
             </div>
@@ -55,16 +55,19 @@
 
         @foreach (var item in (List<AppUSerListViewModel>)ViewBag.Personeller)
         {
-            <div class="card border border-primary mb-3">
+            <div class="card border border-primary mb-3 p-2">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="~/img/@item.Picture" class="card-img" alt="@item.Name">
+                        <img src="~/img/@item.Picture" class="card-img img-thumbnail shadow" style="height:10rem!important" alt="@item.Name">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">@item.Name @item.SurName</h5>
                             <p class="card-text">Bir Görev almış mı?</p>
-                            <p class="card-text"><small class="text-muted">@item.Email</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">@item.Email</small>
+                                <a href="" class="btn btn-primary btn-sm float-right">Görevlendir</a>
+                            </p>
                         </div>
                     </div>
                 </div>
