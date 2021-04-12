@@ -41,6 +41,11 @@ namespace YSKProje.ToDo.Business.Concrete
             return _gorevDal.GetirileAppUserId(appUserId);
         }
 
+        public Gorev GetirRaporlarileId(int id)
+        {
+            return _gorevDal.GetirRaporlarileId(id);
+        }
+
         public List<Gorev> GetirTumTablolarla()
         {
             return _gorevDal.GetirTumTablolarla();

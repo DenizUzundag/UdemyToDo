@@ -16,6 +16,13 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             return contex.Gorevler.Include(I => I.Aciliyet).FirstOrDefault(I => !I.Durum && I.Id == id); //durumu false olanlar gelsin olusturlma tarihine göre
         }
 
+        public Gorev GetirRaporlarileId(int id)
+        {
+            using var context = new TodoContext();
+            return context.Gorevler.Include(I => I.Raporlar).Include(I=>I.AppUser).Where(I => I.Id == id).FirstOrDefault();
+
+        }
+
         //ICalismaDalı yazmamızın sebebi calima ile ilgili özel bir mett varsa gelsin diye
         public List<Gorev> GetirAciliyetIleTamamlanmayan()
         {
