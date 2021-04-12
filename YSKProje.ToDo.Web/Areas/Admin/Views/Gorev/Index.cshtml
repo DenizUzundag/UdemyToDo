@@ -7,7 +7,7 @@
 @if (Model.Count != 0)
 {
 
-    <a asp-action="EkleGorev" class="btn btn-info btn-sm my-2">Yeni görev oluştur</a>
+    <a asp-action="EkleGorev" class="btn btn-outline-dark btn-sm my-2"><i class="fas fa-plus-square mr-2"></i>Yeni görev </a>
     <table class="table table-sm table-hover">
         <tr>
             <th>Ad</th>
@@ -25,8 +25,8 @@
                 <td>@item.OlusturulmaTarihi.ToString("D")</td>
                 <td>@item.Aciliyet.Tanim</td>
                 <td>
-                    <a asp-action="GuncelleGorev" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Düzenle</a>
-                    <a asp-action="SilGorev" asp-route-id="@item.Id">Sil</a>
+                    <a asp-action="GuncelleGorev" asp-route-id="@item.Id" class="btn btn-warning btn-sm"><i class="fas fa-pen-square mr-2"></i>Düzenle</a>
+                    <a asp-action="SilGorev" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="fas fa-times-circle mr-2"></i>Sil</a>
 
                 </td>
             </tr>

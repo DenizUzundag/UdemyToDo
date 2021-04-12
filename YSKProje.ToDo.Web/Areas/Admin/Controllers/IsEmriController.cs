@@ -120,7 +120,8 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         }
         public IActionResult Detaylandir(int id)
         {
-           var gorev= _gorevService.GetirRaporlarileId(id);
+            TempData["Active"] = "isemri";
+            var gorev= _gorevService.GetirRaporlarileId(id);
             GorevListAllViewModel model = new GorevListAllViewModel();
             model.Id = gorev.Id;
             model.AppUser = gorev.AppUser;
