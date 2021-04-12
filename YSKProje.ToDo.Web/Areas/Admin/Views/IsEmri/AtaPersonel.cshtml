@@ -68,7 +68,7 @@
                              </p>
                             <p class="card-text">
                                 <small class="text-muted">@item.Email</small>
-                                <a href="" class="btn btn-primary btn-sm float-right">Görevlendir</a>
+                                <a asp-action ="GorevlendirPersonel" asp-route-PersonelId="@item.Id" asp-route-GorevId="@Model.Id" class="btn btn-primary btn-sm float-right">Görevlendir</a>
                             </p>
                         </div>
                     </div>
