@@ -81,9 +81,20 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             return View(gorevmodel);
         }
 
+        [HttpPost]
+
+        public IActionResult AtaPersonel(PersonelGorevlendirViewModel model)
+        {
+           var guncellenecekGorev= _gorevService.GetirIdile(model.GorevId);
+            guncellenecekGorev.AppUserId = model.PersonelId;
+            _gorevService.Guncelle(guncellenecekGorev);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult GorevlendirPersonel(PersonelGorevlendirViewModel model)
         {
-           var user= _userManager.Users.FirstOrDefault(I => I.Id == model.PersonelId);
+            TempData["Active"] = "isemri";
+            var user= _userManager.Users.FirstOrDefault(I => I.Id == model.PersonelId);
             var gorev = _gorevService.GetirAciliyetileId(model.GorevId);
 
             AppUSerListViewModel userModel = new AppUSerListViewModel();
