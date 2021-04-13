@@ -29,11 +29,11 @@ namespace YSKProje.ToDo.Business.Concrete
 
 
 
-            var filename = Guid.NewGuid() + ".pdf";
-            var returnPath = "/documents/"+filename;
-            var path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/documents/"+filename);
+            var fileName = Guid.NewGuid() + ".pdf";
+            var returnPath = "/documents/"+fileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/documents/"+fileName);
 
-            var stream = new FileStream("", FileMode.Create);
+            var stream = new FileStream(path, FileMode.Create);
 
             Document document = new Document(PageSize.A4,25f,25f,25f,25f);
             //documenti pdfe aktarmak için..
