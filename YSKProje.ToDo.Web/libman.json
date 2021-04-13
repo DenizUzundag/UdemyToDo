@@ -29,7 +29,12 @@
     {
       "library": "font-awesome@5.13.0",
       "destination": "wwwroot/lib/fontAwesome",
-      "files": [ "css/all.min.css", "js/all.min.js" ]
+      "files": [ "css/all.min.css", "js/all.min.js", "webfonts/fa-solid-900.woff",
+        "webfonts/fa-solid-900.woff2",
+        "webfonts/fa-regular-400.woff",
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-regular-400.ttf",
+        "webfonts/fa-solid-900.ttf"
     }
   ]
 }

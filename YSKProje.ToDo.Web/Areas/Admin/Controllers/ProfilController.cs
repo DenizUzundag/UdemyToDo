@@ -22,6 +22,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         }
         public  async Task<IActionResult> Index()
         {
+            TempData["Active"] = "Profil";
            var appuser= await _userManager.FindByNameAsync(User.Identity.Name);
             AppUSerListViewModel model = new AppUSerListViewModel();
             model.Id = appuser.Id;
