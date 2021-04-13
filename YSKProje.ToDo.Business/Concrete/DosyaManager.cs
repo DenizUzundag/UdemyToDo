@@ -11,7 +11,7 @@ using YSKProje.ToDo.Business.Interfaces;
 
 namespace YSKProje.ToDo.Business.Concrete
 {
-    public class DosyaManager : IDosyaManager
+    public class DosyaManager : IDosyaService
     {
         public byte[] AktarExcel<T>(List<T> list) where T : class, new()
         {
@@ -37,7 +37,7 @@ namespace YSKProje.ToDo.Business.Concrete
 
             Document document = new Document(PageSize.A4,25f,25f,25f,25f);
             //documenti pdfe aktarmak için..
-            PdfWriter.GetInstance(document, null);
+            PdfWriter.GetInstance(document, stream);
             document.Open();
 
             PdfPTable pdfPTable = new PdfPTable(dataTable.Columns.Count);

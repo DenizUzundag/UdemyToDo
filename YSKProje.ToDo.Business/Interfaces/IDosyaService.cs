@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YSKProje.ToDo.Business.Interfaces
 {
-    public interface IDosyaManager
+    public interface IDosyaService
     {
         /// <summary>
         /// Geriye üretmiş ve upload etmiş olduğu pdf dosyasının virtual pathini döner

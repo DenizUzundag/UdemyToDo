@@ -30,7 +30,7 @@ namespace YSKProje.ToDo.Web
             services.AddScoped<IAciliyetDal, EfAciliyetRepository>();
             services.AddScoped<IAppUserService, AppUserManager>();
             services.AddScoped<IAppUserDal, EfAppUserRepository>();
-
+            services.AddScoped<IDosyaService, DosyaManager>();
             services.AddDbContext<TodoContext>();
             services.AddIdentity<AppUser, AppRole>(opt=> {
 
