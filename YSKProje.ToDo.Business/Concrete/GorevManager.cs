@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using YSKProje.ToDo.DataAccess.Interfaces;
@@ -49,6 +51,11 @@ namespace YSKProje.ToDo.Business.Concrete
         public List<Gorev> GetirTumTablolarla()
         {
             return _gorevDal.GetirTumTablolarla();
+        }
+
+        public List<Gorev> GetirTumTablolarla(Expression<Func<Gorev, bool>> filter)
+        {
+            return _gorevDal.GetirTumTablolarla(filter);
         }
 
         public void Guncelle(Gorev tablo)
