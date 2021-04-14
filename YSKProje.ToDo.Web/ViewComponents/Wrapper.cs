@@ -33,9 +33,6 @@ namespace YSKProje.ToDo.Web.ViewComponents
                 return View(model);
             }
 
-
-
-
             return View("Member",model);
         }
     }
