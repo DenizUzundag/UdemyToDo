@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.Areas.Admin.Models;
 
-namespace YSKProje.ToDo.Web.Areas.Admin.ViewComponents
+namespace YSKProje.ToDo.Web.ViewComponents
 {
-    public class Wrapper:ViewComponent
+    public class Wrapper: ViewComponent
     {
         private readonly UserManager<AppUser> _userManager;
         public Wrapper(UserManager<AppUser> userManager)
@@ -18,7 +18,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-           var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
             AppUSerListViewModel model = new AppUSerListViewModel();
 
             model.Id = user.Id;
@@ -27,10 +27,16 @@ namespace YSKProje.ToDo.Web.Areas.Admin.ViewComponents
             model.SurName = user.Surname;
             model.Email = user.Email;
 
+            var roles = _userManager.GetRolesAsync(user).Result;
+            if(roles.Contains("Admin"))
+            {
+                return View(model);
+            }
 
 
 
-            return View(model);
+
+            return View("Member",model);
         }
     }
 }
