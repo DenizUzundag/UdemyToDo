@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.Areas.Admin.Models;
 
-namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
+namespace YSKProje.ToDo.Web.Member.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Area("Member")]
+    [Authorize(Roles ="Member")]
     public class ProfilController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
