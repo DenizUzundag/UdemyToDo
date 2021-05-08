@@ -2,10 +2,12 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
+    int index =0;
 }
 
 @foreach (var gorev in Model)
 {
+    index++;
     <div class="card my-1">
         <h5 class="card-header">@gorev.Ad</h5>
         <div class="card-body">
@@ -16,7 +18,7 @@
             <p class="text-right">
                 @if (gorev.Raporlar.Count > 0)
                 {
-                    <a class="btn btn-light btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <a class="btn btn-light btn-sm" data-bs-toggle="collapse" href="#collapseExample-@index" role="button" aria-expanded="false" aria-controls="collapseExample">
                         Raporlara git<i class="fas fa-caret-down ml-2"></i>
                         <span class="badge badge-dark">@gorev.Raporlar.Count</span>
                     </a>
@@ -28,7 +30,7 @@
                     <span class="lead font-weight-bold font-italic d-block text-left mb-1">
                         Hiç rapor yazmamışsınız, görevinizdeki ilerlemelerinizden bahsedin.
                     </span>
-                    <a href="" class="btn btn-light btn-sm">Rapor Yaz</a>
+                    <a asp-action="EkleRapor" asp-route-id="@gorev.Id" class="btn btn-light btn-sm"><i class=" fas fa-plus-circle mr-2"></i>Rapor Yaz</a>
                 }
 
                 <a href="#" class="btn btn-dark btn-sm">
@@ -36,10 +38,26 @@
                 </a>
 
             </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                </div>
+            <div class="collapse" id="collapseExample-@index">
+                <a asp-action="EkleRapor" asp-route-id="@gorev.Id" class="btn btn-light btn-sm"><i class=" fas fa-plus-circle mr-2"></i>Rapor Yaz</a>
+                <table class="table table-hover table-bordered table-sm">
+
+                    <tr>
+                        <th>Tanım</th>
+                        <th>Detay</th>
+                        <th>İşlem</th>
+                    </tr>
+                    @foreach (var rapor in gorev.Raporlar)
+                    {
+                        <tr>
+                            <td>@rapor.Tanim</td>
+                            <td>@rapor.Detay</td>
+                            <td>
+                                <a asp-action="GuncelleRapor" asp-route-id="@rapor.Id" class="btn btn-warning btn-sm"><i class="far fa-edit mr-2"></i>Düzenle</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
 
             </div>
 
@@ -47,5 +65,6 @@
     </div>
 
 }
+
 
 
