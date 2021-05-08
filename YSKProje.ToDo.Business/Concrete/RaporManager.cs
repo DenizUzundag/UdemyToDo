@@ -15,6 +15,12 @@ namespace YSKProje.ToDo.Business.Concrete
         {
             _raporDal = raporDal;
         }
+
+        public Rapor GetirGorevileId(int id)
+        {
+            return _raporDal.GetirGorevileId(id);
+        }
+
         public List<Rapor> GetirHepsi()
         {
             return _raporDal.GetirHepsi();

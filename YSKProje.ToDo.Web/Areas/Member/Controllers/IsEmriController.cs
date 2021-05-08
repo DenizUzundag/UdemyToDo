@@ -76,5 +76,37 @@ namespace YSKProje.ToDo.Web.Areas.Member.Controllers
             return View(model);
 
         }
+
+        public IActionResult GuncelleRapor(int id)
+        {
+            TempData["Active"] = "isemri";
+            var rapor = _raporService.GetirGorevileId(id);
+            RaporUpdateViewModel model = new RaporUpdateViewModel();
+            model.Id = rapor.Id;
+            model.Tanim = rapor.Tanim;
+            model.Detay = rapor.Detay;
+            model.Gorev = rapor.Gorev;
+            model.GorevId = rapor.GorevId;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult GuncelleRapor(Rapor model)
+        {
+            if(ModelState.IsValid)
+            {
+               var guncellenecekRapor = _raporService.GetirIdile(model.Id);
+  
+                guncellenecekRapor.Tanim = model.Tanim;
+                guncellenecekRapor.Detay = model.Detay;
+
+                _raporService.Guncelle(guncellenecekRapor);
+                return RedirectToAction("Index");
+
+            }
+
+            return View(model);
+        }
     }
 }

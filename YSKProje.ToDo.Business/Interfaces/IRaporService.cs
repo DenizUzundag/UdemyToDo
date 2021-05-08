@@ -5,6 +5,8 @@ using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Business.Interfaces
 {
-    public interface IRaporService:IGenericService<Rapor>
+    public interface IRaporService : IGenericService<Rapor>
     {
-    }}
+        Rapor GetirGorevileId(int id);
+    }
+}
