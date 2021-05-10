@@ -25,7 +25,7 @@
         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-pie-2 mr-2"></i>Grafikler</a>
         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-area mr-2"></i>İstatistikler</a>
 
-        <a href="#" class="list-group-item list-group-item-action position-relative">
+        <a asp-action="Index" asp-controller="Bildirim" class="list-group-item list-group-item-action position-relative">
             <i class="far fa-bell mr-2"></i>
             @if (ViewBag.BildirimSayisi > 0)
             {
