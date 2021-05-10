@@ -8,5 +8,6 @@ namespace YSKProje.ToDo.Business.Interfaces
     public interface IBildirimService: IGenericService<Bildirim>
     {
         List<Bildirim> GetirOkunmayanlar(int AppUserId);
+        int GetirOkunmayanBildirimSayisiAppUserId(int AppUserId);
     }
 }

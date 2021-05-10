@@ -53,6 +53,11 @@ namespace YSKProje.ToDo.Business.Concrete
             return _gorevDal.GetirRaporlarileId(id);
         }
 
+        public int GetirTamamlanmyanGorevSayisi(int id)
+        {
+            return _gorevDal.GetirTamamlanmyanGorevSayisi(id);
+        }
+
         public List<Gorev> GetirTumTablolarla()
         {
             return _gorevDal.GetirTumTablolarla();

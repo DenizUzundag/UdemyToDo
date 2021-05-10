@@ -62,9 +62,9 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
         public List<Gorev> GetirTumTablolarlaTamamlanmayan(out int toplamSayfa, int userId ,int aktifSayfa=1)
         {
-            using var contex = new TodoContext();
+            using var context = new TodoContext();
 
-            var returnValue = contex.Gorevler.Include(I => I.Aciliyet).Include(I => I.Raporlar).Include(I => I.AppUser)
+            var returnValue = context.Gorevler.Include(I => I.Aciliyet).Include(I => I.Raporlar).Include(I => I.AppUser)
                   .Where(I => I.AppUserId == userId && I.Durum==true).OrderByDescending(I => I.OlusturulmaTarihi);//durumu false olanlar gelsin olusturlma tarihine göre
 
             toplamSayfa = (int)Math.Ceiling((double)returnValue.Count() / 3);
@@ -76,7 +76,14 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
         public int GetirGorevSayisiTamamlananileAppUserId(int id)
         {
             using var context = new TodoContext();
-            return context.Gorevler.Count(I => I.AppUserId == id && !I.Durum);
+            return context.Gorevler.Count(I => I.AppUserId == id && I.Durum==true );
+        }
+
+        public int GetirTamamlanmyanGorevSayisi(int id)
+        {
+            using var context = new TodoContext();
+            return context.Gorevler
+                  .Count(I => I.AppUserId == id && !I.Durum);
         }
     }
 }

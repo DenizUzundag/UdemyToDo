@@ -8,6 +8,7 @@ namespace YSKProje.ToDo.DataAccess.Interfaces
     public interface IBildirimDal: IGenericDal<Bildirim>
     {
         List<Bildirim> GetirOkunmayanlar(int AppUserId);
+        int GetirOkunmayanBildirimSayisiAppUserId(int AppUserId);
         
     }
 }

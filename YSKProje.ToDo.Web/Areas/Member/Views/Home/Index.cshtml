@@ -35,7 +35,7 @@
                 {
                     <p class="card-text display-4">@ViewBag.TamamlananGorevSayisi</p>
                     <p class="">
-                      <a asp-action="Index" asp-controller="Gorev" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right mr-2"></i>İncele</a>
+                        <a asp-action="Index" asp-controller="Gorev" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right mr-2"></i>İncele</a>
 
                     </p>
 
@@ -44,6 +44,55 @@
                 else
                 {
                     <p class="card-text lead">Herhanagi bir görev tamamlamamışşınız</p>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="  card text-white text-center bg-primary mb-3">
+
+            <div class="card-body">
+
+                <h4 class="card-title">Tamamlanmayan Görev Sayısı</h4>
+                @if (ViewBag.TamamlanmayanGorevSaysii > 0)
+                {
+                    <p class="card-text display-4">@ViewBag.TamamlanmayanGorevSaysii</p>
+                    <p class="">
+                        <a asp-action="Index" asp-controller="IsEmri" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right mr-2"></i>İncele</a>
+
+                    </p>
+
+
+                }
+                else
+                {
+                    <p class="card-text lead">Tüm görevleri tamamlamışsınız</p>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="  card text-white text-center bg-primary mb-3">
+
+            <div class="card-body">
+
+                <h4 class="card-title">Okunmamış Bildirim Sayısı</h4>
+                @if (ViewBag.OkunmamısBildirimSayisi > 0)
+                {
+            <p class="card-text display-4">@ViewBag.OkunmamısBildirimSayisi</p>
+                    <p class="">
+                        <a asp-action="Index" asp-controller="Bildirim" class="btn btn-light btn-sm"><i class="fas fa-chevron-circle-right mr-2"></i>İncele</a>
+
+                    </p>
+
+
+                }
+                else
+                {
+                    <p class="card-text lead">Tüm bildirimleri okumuşsunuz</p>
                 }
             </div>
         </div>
