@@ -31,8 +31,12 @@ namespace YSKProje.ToDo.Web
             services.AddScoped<IAppUserService, AppUserManager>();
             services.AddScoped<IAppUserDal, EfAppUserRepository>();
             services.AddScoped<IDosyaService, DosyaManager>();
+            services.AddScoped<IBildirimService, BildirimManager>();
+            services.AddScoped<IBildirimDal, EfBildirimRepository>();
             services.AddDbContext<TodoContext>();
+          
             services.AddIdentity<AppUser, AppRole>(opt=> {
+
 
                 //password validasyon
                 opt.Password.RequireDigit = false;//sayý içerme
