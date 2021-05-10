@@ -24,6 +24,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            TempData["Active"] = "bildirim";
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var bildirimler = _bildirimService.GetirOkunmayanlar(user.Id);
             List<BildirimListViewModel> models = new List<BildirimListViewModel>();
