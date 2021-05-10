@@ -21,6 +21,8 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Context
         public DbSet<Gorev> Gorevler { get; set; }
         public DbSet<Aciliyet> Aciliyetler { get; set; }
         public DbSet<Rapor> Raporlar { get; set; }
+        public DbSet<Bildirim> Bildirimler { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

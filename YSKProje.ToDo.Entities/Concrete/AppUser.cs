@@ -15,5 +15,7 @@ namespace YSKProje.ToDo.Entities.Concrete
         // bir userın birden fazla gorev olabilir liste olarak gorev alacagız
 
         public List<Gorev> Gorevler { get; set; }
+        public List<Bildirim> Bildirimler { get; set; }
+
     }
 }
