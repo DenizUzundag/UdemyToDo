@@ -72,5 +72,11 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
             return returnValue.Skip((aktifSayfa - 1) * 3).Take(3).ToList();
 
         }
+
+        public int GetirGorevSayisiTamamlananileAppUserId(int id)
+        {
+            using var context = new TodoContext();
+            return context.Gorevler.Count(I => I.AppUserId == id && !I.Durum);
+        }
     }
 }
