@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using YSKProje.ToDo.Web.Areas.Admin.Models;
 
 namespace YSKProje.ToDo.Web.Areas.Member.Controllers
 {
+    [Authorize(Roles ="Member")]
     [Area("Member")]
     public class IsEmriController : Controller
     {

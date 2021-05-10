@@ -18,6 +18,8 @@ namespace YSKProje.ToDo.DataAccess.Interfaces
         List<Gorev> GetirileAppUserId(int appUserId);
         Gorev GetirRaporlarileId(int id);
 
+        List<Gorev> GetirTumTablolarlaTamamlanmayan(out int toplamSayfa, int userId, int aktifSayfa);
+
 
 
 

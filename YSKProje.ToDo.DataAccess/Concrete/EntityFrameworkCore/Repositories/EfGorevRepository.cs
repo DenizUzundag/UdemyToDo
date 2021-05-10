@@ -59,5 +59,18 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
             }
         }
+
+        public List<Gorev> GetirTumTablolarlaTamamlanmayan(out int toplamSayfa, int userId ,int aktifSayfa=1)
+        {
+            using var contex = new TodoContext();
+
+            var returnValue = contex.Gorevler.Include(I => I.Aciliyet).Include(I => I.Raporlar).Include(I => I.AppUser)
+                  .Where(I => I.AppUserId == userId && I.Durum==true).OrderByDescending(I => I.OlusturulmaTarihi);//durumu false olanlar gelsin olusturlma tarihine göre
+
+            toplamSayfa = (int)Math.Ceiling((double)returnValue.Count() / 3);
+
+            return returnValue.Skip((aktifSayfa - 1) * 3).Take(3).ToList();
+
+        }
     }
 }
