@@ -24,6 +24,11 @@ namespace YSKProje.ToDo.Business.Concrete
             return _bildirimDal.GetirIdile(id);
         }
 
+        public List<Bildirim> GetirOkunmayanlar(int AppUserId)
+        {
+            return _bildirimDal.GetirOkunmayanlar(AppUserId);
+        }
+
         public void Guncelle(Bildirim tablo)
         {
             _bildirimDal.Guncelle(tablo);

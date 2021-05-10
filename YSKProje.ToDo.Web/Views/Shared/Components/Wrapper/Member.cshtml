@@ -22,7 +22,20 @@
        
         <a asp-action="Index" asp-controller="IsEmri"  class="list-group-item list-group-item-action @(active == "isemri"?"active":"")"><i class="fas fa-arrow-alt-circle-down mr-2"></i>Gelen İş Emirleri</a>
         <a asp-action="Index" asp-controller="Gorev" class="list-group-item list-group-item-action @(active == "gorev"?"active":"")"><i class="fas fa-arrow-alt-circle-up mr-2"></i>Tamamladığım İşler</a>
-        <a href="#" class="list-group-item list-group-item-action"><i class="far fa-bell mr-2"></i>Bildirimler</a>
+       
+            <a href="#" class="list-group-item list-group-item-action position-relative">
+                <i class="far fa-bell mr-2"></i>
+                @if (ViewBag.BildirimSayisi > 0)
+                {
+                    <sub class="badge badge-info badge-pill position-absolute" style="bottom:0.625rem!important; left:1.7rem!important;">
+                        <small>@ViewBag.BildirimSayisi</small>
+                    </sub>
+                }
+                Bildirimler
+            </a>
+
+            Bildirimler
+       
         <a asp-action="Index" asp-controller="Profil" class="list-group-item list-group-item-action"><i class="fas fa-user mr-2"></i>Profilim</a>
         <a asp-area="" asp-action="CikisYap" asp-controller="Home" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap</a>
     </div>
