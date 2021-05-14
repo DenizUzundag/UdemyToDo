@@ -9,7 +9,8 @@ namespace YSKProje.ToDo.Business.Interfaces
     {
         Rapor GetirGorevileId(int id);
         int GetirRaporSayisiileAppUserId(int id);
+        int GetirRaporSayisi();
 
-        
+
     }
 }

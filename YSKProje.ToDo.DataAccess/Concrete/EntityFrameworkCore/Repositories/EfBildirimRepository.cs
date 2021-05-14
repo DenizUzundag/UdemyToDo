@@ -13,7 +13,7 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
         public int GetirOkunmayanBildirimSayisiAppUserId(int AppUserId)
         {
             using var context = new TodoContext();
-            return context.Bildirimler.Count(I => I.AppUseId == AppUserId && !I.Durum);
+            return context.Bildirimler.Where(I => I.AppUseId == AppUserId && !I.Durum).Count();
         }
 
         public List<Bildirim> GetirOkunmayanlar(int AppUserId)

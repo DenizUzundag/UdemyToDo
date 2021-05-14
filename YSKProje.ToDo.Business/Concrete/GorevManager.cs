@@ -27,9 +27,19 @@ namespace YSKProje.ToDo.Business.Concrete
             return _gorevDal.GetirAciliyetIleTamamlanmayan();
         }
 
+        public int GetirAtanmayiBekleyenGorevSayisi()
+        {
+            return _gorevDal.GetirAtanmayiBekleyenGorevSayisi();
+        }
+
         public int GetirGorevSayisiTamamlananileAppUserId(int id)
         {
             return _gorevDal.GetirGorevSayisiTamamlananileAppUserId(id);
+        }
+
+        public int GetirGorevTamamlanmis()
+        {
+            return _gorevDal.GetirGorevTamamlanmis();
         }
 
         public List<Gorev> GetirHepsi()

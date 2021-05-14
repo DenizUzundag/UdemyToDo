@@ -22,6 +22,12 @@ namespace YSKProje.ToDo.DataAccess.Interfaces
         int GetirTamamlanmyanGorevSayisi(int id);
         int GetirGorevSayisiTamamlananileAppUserId(int id);
 
+        int GetirAtanmayiBekleyenGorevSayisi();//appUserid'si null olanları getiricez
+
+        int GetirGorevTamamlanmis();
+
+
+
 
 
 

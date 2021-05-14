@@ -17,5 +17,8 @@ namespace YSKProje.ToDo.Business.Interfaces
         List<Gorev> GetirTumTablolarlaTamamlanmayan(out int toplamSayfa, int userId, int aktifSayfa=1);
         int GetirGorevSayisiTamamlananileAppUserId(int id);
         int GetirTamamlanmyanGorevSayisi(int id);
+        int GetirAtanmayiBekleyenGorevSayisi();
+
+        int GetirGorevTamamlanmis();
     }
 }
