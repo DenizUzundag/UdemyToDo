@@ -1,3 +1,6 @@
+using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,9 +9,14 @@ using Microsoft.Extensions.Hosting;
 using System;
 using YSKProje.ToDo.Business.Concrete;
 using YSKProje.ToDo.Business.Interfaces;
+using YSKProje.ToDo.Business.ValidationRules.FluentValidation;
 using YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Context;
 using YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using YSKProje.ToDo.DataAccess.Interfaces;
+using YSKProje.ToDo.DTO.DTOs.AciliyetDtos;
+using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
+using YSKProje.ToDo.DTO.DTOs.GorevDtos;
+using YSKProje.ToDo.DTO.DTOs.RaporDtos;
 using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.Web
@@ -47,7 +55,7 @@ namespace YSKProje.ToDo.Web
             }).
             
            AddEntityFrameworkStores<TodoContext>();
-            services.AddControllersWithViews();
+           
             services.ConfigureApplicationCookie(opt =>
             {
                 opt.Cookie.Name = "IsTakipCookie";
@@ -57,6 +65,17 @@ namespace YSKProje.ToDo.Web
                 opt.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
                 opt.LoginPath = "/Home/Index";
             });
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<IValidator<AciliyetAddDto>, AciliyetAddValidator>();
+            services.AddTransient<IValidator<AciliyetUpdateDto>, AciliyetUpdateValidator>();
+            services.AddTransient<IValidator<AppUserAddDto>, AppUserAddValidator>();
+            services.AddTransient<IValidator<AppUserSignInDto>, AppUserSignInValidator>();
+            services.AddTransient<IValidator<GorevAddDto>, GorevAddValidator>();
+            services.AddTransient<IValidator<GorevUpdateDto>, GorevUpdateValidator>();
+            services.AddTransient<IValidator<RaporAddDto>,RaporAddValidator>();
+            services.AddTransient<IValidator<RaporUpdateDto>, RaporUpdateValidator>();
+            services.AddControllersWithViews().AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

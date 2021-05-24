@@ -6,9 +6,9 @@ using YSKProje.ToDo.DTO.DTOs.AciliyetDtos;
 
 namespace YSKProje.ToDo.Business.ValidationRules.FluentValidation
 {
-    public class AciliyetUpdateValidatorAccessViolationException: AbstractValidator<AciliyetUpdateDto>
+    public class AciliyetUpdateValidator: AbstractValidator<AciliyetUpdateDto>
     {
-        public AciliyetUpdateValidatorAccessViolationException()
+        public AciliyetUpdateValidator()
         {
             RuleFor(I => I.Tanim).NotNull().WithMessage("Tanım alanı boş geçilemez");
         }
