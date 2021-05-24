@@ -92,7 +92,7 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
 
 
         }
-        public List<DualHelper> EnCokGorevTamamlamisPersoneller()
+        public List<DualHelper> GetirEnCokGorevTamamlamisPersoneller()
         {
             using var context = new TodoContext();
             return context.Gorevler.Include(I => I.AppUser).Where(I => I.Durum).GroupBy(I => I.AppUser.UserName)
@@ -102,7 +102,7 @@ namespace YSKProje.ToDo.DataAccess.Concrete.EntityFrameworkCore.Repositories
                  }).ToList();
             
         }
-        public List<DualHelper> EnCokGorevdeCalisanPersoneller()
+        public List<DualHelper> GetirEnCokGorevdeCalisanPersoneller()
         {
             using var context = new TodoContext();
             return context.Gorevler.Include(I => I.AppUser).Where(I => !I.Durum && I.AppUserId !=null).GroupBy(I => I.AppUser.UserName)
