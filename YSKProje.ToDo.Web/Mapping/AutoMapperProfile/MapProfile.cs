@@ -47,6 +47,8 @@ namespace YSKProje.ToDo.Web.Mapping.AutoMapperProfile
             CreateMap<Gorev, GorevListDto>();
             CreateMap<GorevUpdateDto, Gorev>();
             CreateMap<Gorev, GorevUpdateDto>();
+            CreateMap<Gorev, GorevListAllDto>();
+            CreateMap<GorevListAllDto, Gorev>();
             #endregion
 
             #region Rapor-RaporDto
