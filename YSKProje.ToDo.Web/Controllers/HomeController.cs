@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
+using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.Models;
 
@@ -26,7 +27,7 @@ namespace YSKProje.ToDo.Web.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> GirisYap(AppUserSignInModel model)
+        public async Task<IActionResult> GirisYap(AppUserSignInDto model)
         {
             if(ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace YSKProje.ToDo.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> KayitOl(AppUserAddViewModel model)
+        public async Task<IActionResult> KayitOl(AppUserAddDto model)
         {
             if (ModelState.IsValid)
             {

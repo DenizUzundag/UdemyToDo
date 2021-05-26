@@ -1,4 +1,4 @@
-﻿@model AppUserAddViewModel 
+﻿@model AppUserAddDto
 @{
     ViewData["Title"] = "KayitOl";
     Layout = "~/Views/Shared/_StandartLayout.cshtml";
@@ -7,31 +7,31 @@
 <form asp-action="KayitOl" method="post" class="mt-4 w-75 mx-auto p-3 shadow">
     <h4 class="text-center"> Kayit ol</h4>
     <div class="form-group">
-        <label asp-for="@Model.Name"></label>
+        <label asp-for="@Model.Name">Ad:</label>
         <span asp-validation-for="@Model.Name" class="text-danger"></span>
         <input asp-for="@Model.Name" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Surname"></label>
+        <label asp-for="@Model.Surname">Soyad:</label>
         <span asp-validation-for="@Model.Surname" class="text-danger"></span>
         <input asp-for="@Model.Surname" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Email"></label>
+        <label asp-for="@Model.Email">Email:</label>
         <span asp-validation-for="@Model.Email" class="text-danger"></span>
         <input asp-for="@Model.Email" class="form-control" />
     </div><div class="form-group">
-        <label asp-for="@Model.Password"></label>
+        <label asp-for="@Model.Password">Şifre:</label>
         <span asp-validation-for="@Model.Password" class="text-danger"></span>
-        <input asp-for="@Model.Password" class="form-control" />
+        <input type="password" asp-for="@Model.Password" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.ConfirmPassword"></label>
+        <label asp-for="@Model.ConfirmPassword">Tekrar Şifre</label>
         <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
-        <input asp-for="@Model.ConfirmPassword" class="form-control" />
+        <input type="password" asp-for="@Model.ConfirmPassword" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="@Model.UserName"></label>
+        <label asp-for="@Model.UserName">Kullanıcı Ad:</label>
         <span asp-validation-for="@Model.UserName" class="text-danger"></span>
         <input asp-for="@Model.UserName" class="form-control" />
     </div>
@@ -43,4 +43,5 @@
     <button type="submit" class="btn btn-info btn-sm">Kayit ol</button>
 
 </form>
+
 
