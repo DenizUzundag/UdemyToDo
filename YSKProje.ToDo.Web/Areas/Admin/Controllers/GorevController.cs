@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
+using YSKProje.ToDo.DTO.DTOs.GorevDtos;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.Areas.Admin.Models;
 
@@ -18,36 +20,21 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
     {
         private readonly IGorevService _gorevService;
         private readonly IAciliyetService _aciliyetService;
-        public GorevController(IGorevService gorevService, IAciliyetService aciliyetService)
+        private readonly IMapper _mapper;
+        public GorevController(IGorevService gorevService, IAciliyetService aciliyetService, IMapper mapper)
         {
             _gorevService = gorevService;
             _aciliyetService = aciliyetService;
+            _mapper = mapper;
 
         }
         public IActionResult Index()
         {
             TempData["Active"] = "gorev";
-            List<Gorev> gorevler =  _gorevService.GetirAciliyetIleTamamlanmayan();
+          
 
-            //bunları daha sonra mapper kütüphanelerini kullanaarak refactoring yapacagız
-            List<GorevListViewModel> models = new List<GorevListViewModel>();
-            foreach (var item in gorevler)
-            {
-                GorevListViewModel model = new GorevListViewModel
-                {
-                    Aciklama = item.Aciklama,
-                    Aciliyet=item.Aciliyet,
-                    AciliyetId =item.AciliyetId,
-                    Ad=item.Ad,
-                    Durum =item.Durum,
-                    Id=item.Id,
-                    OlusturulmaTarihi =item.OlusturulmaTarihi
-
-                };
-                models.Add(model);
-            }
-
-            return View(models);
+            return View(
+            _mapper.Map<List<GorevListDto>>(_gorevService.GetirAciliyetIleTamamlanmayan()));
         }
 
         public IActionResult EkleGorev()
@@ -55,11 +42,11 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             TempData["Active"] = "gorev";
 
             ViewBag.Aciliyetler = new SelectList(_aciliyetService.GetirHepsi(), "Id", "Tanim");  //Tanım gösterilecek, ıd ve tanımla bu işi yapacağız
-            return View(new GorevAddViewModel());
+            return View(new GorevAddDto());
         }
 
         [HttpPost]
-        public IActionResult EkleGorev(GorevAddViewModel model)
+        public IActionResult EkleGorev(GorevAddDto model)
         {
             if(ModelState.IsValid)
             {
@@ -81,21 +68,15 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult GuncelleGorev(int id)
         {
-           var gorev = _gorevService.GetirIdile(id);
-            GorevUpdateViewModel model = new GorevUpdateViewModel
-            {
-                Id = gorev.Id,
-                Aciklama = gorev.Aciklama,
-                AciliyetId = gorev.AciliyetId,
-                Ad = gorev.Ad
-            };
+        
             TempData["Active"] = "gorev";
-
+            
+            var gorev = _gorevService.GetirIdile(id);
             ViewBag.Aciliyetler = new SelectList(_aciliyetService.GetirHepsi(), "Id", "Tanim",gorev.AciliyetId);  //Aciliyet seçili olarak gelicek
-            return View(model);
+            return View(_mapper.Map<GorevUpdateDto>(gorev));
         }
         [HttpPost]
-        public IActionResult GuncelleGorev(GorevUpdateViewModel model)
+        public IActionResult GuncelleGorev(GorevUpdateDto model)
         {
             if(ModelState.IsValid)
             {
@@ -107,8 +88,10 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
                     Ad=model.Ad
 
                 });
+
                 return RedirectToAction("Index");
             }
+            ViewBag.Aciliyetler = new SelectList(_aciliyetService.GetirHepsi(), "Id", "Tanim", model.AciliyetId);
             return View(model);
         }
 

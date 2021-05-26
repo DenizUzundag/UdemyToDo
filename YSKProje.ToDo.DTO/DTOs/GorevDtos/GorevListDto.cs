@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YSKProje.ToDo.Entities.Concrete;
 
 namespace YSKProje.ToDo.DTO.DTOs.GorevDtos
 {
@@ -14,6 +15,6 @@ namespace YSKProje.ToDo.DTO.DTOs.GorevDtos
         public bool Durum { get; set; }
         public DateTime OlusturulmaTarihi { get; set; }
         public int AciliyetId { get; set; }//zorunlu
-        //public Aciliyet Aciliyet { get; set; }
+        public Aciliyet Aciliyet { get; set; }
     }
 }
