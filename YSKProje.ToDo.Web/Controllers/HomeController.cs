@@ -4,19 +4,20 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.Entities.Concrete;
+using YSKProje.ToDo.Web.BaseControllers;
 
 namespace YSKProje.ToDo.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseIdentityController
     {
 
-        private readonly UserManager<AppUser> _userManager;
+     
         private readonly SignInManager<AppUser> _signInManager;
       
-        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager):base(userManager)
         {
            
-            _userManager = userManager;
+      
             _signInManager = signInManager;
         }
         public IActionResult Index()
@@ -29,7 +30,7 @@ namespace YSKProje.ToDo.Web.Controllers
             if(ModelState.IsValid)
             {
                 //user var mı yok mu
-               var user = await _userManager.FindByNameAsync(model.UserName);
+                var user = await GetirGirisYapanKullanici();
                 if(user != null)
                 {
                     //parola ile giriş kontolü
@@ -82,15 +83,10 @@ namespace YSKProje.ToDo.Web.Controllers
                     {
                         return RedirectToAction("Index");
                     }
-                    foreach (var item in addroleResult.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
+                    HataEkle(addroleResult.Errors);
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                HataEkle(result.Errors);
+               
             }
             return View(model);
         }
