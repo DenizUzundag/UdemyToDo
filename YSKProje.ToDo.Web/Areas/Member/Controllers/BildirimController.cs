@@ -10,11 +10,12 @@ using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.BildirimDtos;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.BaseControllers;
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Areas.Member.Controllers
 {
-    [Authorize(Roles ="Member")]
-    [Area("MEmber")]
+    [Authorize(Roles=RoleInfo.Member)]
+    [Area(AreaInfo.Member)]
     public class BildirimController : BaseIdentityController
     {
         private readonly IBildirimService _bildirimService;
@@ -28,7 +29,7 @@ namespace YSKProje.ToDo.Web.Areas.Member.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "bildirim";
+            TempData["Active"] = TempDataInfo.Bildirim;
             var user = GetirGirisYapanKullanici();
            
            

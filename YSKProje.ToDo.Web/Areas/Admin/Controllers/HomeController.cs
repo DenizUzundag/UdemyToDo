@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.BaseControllers;
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
-   [Authorize(Roles ="Admin")]
-    [Area("Admin")]
+   [Authorize(Roles =RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class HomeController : BaseIdentityController
     {
         private readonly IGorevService _gorevService;
@@ -34,7 +35,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
          */
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "anasayfa";
+            TempData["Active"] = TempDataInfo.Anasayfa;
             var user = GetirGirisYapanKullanici();
            ViewBag.AtanmayiBekleyenGorevSayisi = _gorevService.GetirAtanmayiBekleyenGorevSayisi();
 

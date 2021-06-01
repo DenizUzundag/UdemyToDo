@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class GrafikController : Controller
     {
         private readonly IAppUserService _appUserService;
@@ -24,7 +25,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         //where Gorevler.Durum=1 group by AspNetUsers.UserName count
         public IActionResult Index()
         {
-            TempData["Active"] = "grafik";
+            TempData["Active"] = TempDataInfo.Grafik;
             return View();
         }
         public IActionResult EnCokTamamlayan()

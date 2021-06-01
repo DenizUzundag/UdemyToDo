@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.AciliyetDtos;
 using YSKProje.ToDo.Entities.Concrete;
-
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
-
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class AciliyetController : Controller
     {
         private readonly IAciliyetService _aciliyetService;
@@ -29,7 +28,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         {
 
             //active bilgimizin taşınması
-            TempData["Active"] = "aciliyet";
+            TempData["Active"] = TempDataInfo.Aciliyet;
 
 
            return View(_mapper.Map<List<AciliyetListDto>>(_aciliyetService.GetirHepsi()));
@@ -39,7 +38,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult EkleAciliyet()
         {
-            TempData["Active"] = "aciliyet";
+            TempData["Active"] = TempDataInfo.Aciliyet;
             return View(new AciliyetAddDto());
         }
 
@@ -59,8 +58,8 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult GuncelleAciliyet(int id)
         {
-            TempData["Active"] = "aciliyet";
-          
+            TempData["Active"] = TempDataInfo.Aciliyet;
+
             return View(_mapper.Map<AciliyetUpdateDto>(_aciliyetService.GetirIdile(id)));
         }
         [HttpPost]

@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.BaseControllers;
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Member.Admin.Controllers
 {
-    [Area("Member")]
-    [Authorize(Roles ="Member")]
+    [Authorize(Roles = RoleInfo.Member)]
+    [Area(AreaInfo.Member)]
     public class ProfilController : BaseIdentityController
     {
        
@@ -27,7 +28,7 @@ namespace YSKProje.ToDo.Web.Member.Admin.Controllers
         }
         public  async Task<IActionResult> Index()
         {
-            TempData["Active"] = "Profil";
+            TempData["Active"] = TempDataInfo.Profil;
             var appuser = GetirGirisYapanKullanici();
            
            

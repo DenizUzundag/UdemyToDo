@@ -10,12 +10,12 @@ using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.DTO.DTOs.GorevDtos;
 using YSKProje.ToDo.Entities.Concrete;
-
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class IsEmriController : Controller
     {
        
@@ -36,14 +36,14 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            TempData["Active"] = "isemri";
+            TempData["Active"] = TempDataInfo.IsEmri;
          
            
             return View(_mapper.Map<List<GorevListAllDto>>(_gorevService.GetirTumTablolarla()));
         }
         public IActionResult AtaPersonel(int id,string s,int sayfa=1)
         {
-            TempData["Active"] = "isemri";
+            TempData["Active"] = TempDataInfo.IsEmri;
 
             ViewBag.AktifSayfa = sayfa;
             //ViewBag.ToplamSAyfa = (int)Math.Ceiling((double)_appUserService.GetirAdminOlmayanlar().Count / 3);//toplam sayfa
@@ -82,7 +82,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult GorevlendirPersonel(PersonelGorevlendirDto model)
         {
-            TempData["Active"] = "isemri";
+            TempData["Active"] = TempDataInfo.IsEmri;
 
             PersonelGorevlendirListDto personelGorevlendirModel = new PersonelGorevlendirListDto
             {
@@ -98,8 +98,8 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         }
         public IActionResult Detaylandir(int id)
         {
-            TempData["Active"] = "isemri";
-           
+            TempData["Active"] = TempDataInfo.IsEmri;
+
             return View(_mapper.Map<GorevListAllDto>(_gorevService.GetirRaporlarileId(id)));
         }
 

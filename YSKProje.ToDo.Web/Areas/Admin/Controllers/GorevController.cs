@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.GorevDtos;
 using YSKProje.ToDo.Entities.Concrete;
+using YSKProje.ToDo.Web.StringInfo;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
-
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class GorevController : Controller
     {
         private readonly IGorevService _gorevService;
@@ -26,7 +26,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            TempData["Active"] = "gorev";
+            TempData["Active"] = TempDataInfo.Gorev;
           
 
             return View(
@@ -35,7 +35,9 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult EkleGorev()
         {
-            TempData["Active"] = "gorev";
+
+            TempData["Active"] = TempDataInfo.Gorev;
+
 
             ViewBag.Aciliyetler = new SelectList(_aciliyetService.GetirHepsi(), "Id", "Tanim");  //Tanım gösterilecek, ıd ve tanımla bu işi yapacağız
             return View(new GorevAddDto());
@@ -64,9 +66,11 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 
         public IActionResult GuncelleGorev(int id)
         {
-        
-            TempData["Active"] = "gorev";
-            
+
+
+            TempData["Active"] = TempDataInfo.Gorev;
+
+
             var gorev = _gorevService.GetirIdile(id);
             ViewBag.Aciliyetler = new SelectList(_aciliyetService.GetirHepsi(), "Id", "Tanim",gorev.AciliyetId);  //Aciliyet seçili olarak gelicek
             return View(_mapper.Map<GorevUpdateDto>(gorev));
