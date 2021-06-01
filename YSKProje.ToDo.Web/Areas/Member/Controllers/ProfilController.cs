@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.Entities.Concrete;
 using YSKProje.ToDo.Web.Areas.Admin.Models;
 
@@ -17,26 +19,24 @@ namespace YSKProje.ToDo.Web.Member.Admin.Controllers
     public class ProfilController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public ProfilController(UserManager<AppUser> userManager)
+        public ProfilController(UserManager<AppUser> userManager,IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
         public  async Task<IActionResult> Index()
         {
             TempData["Active"] = "Profil";
            var appuser= await _userManager.FindByNameAsync(User.Identity.Name);
-            AppUSerListViewModel model = new AppUSerListViewModel();
-            model.Id = appuser.Id;
-            model.Name = appuser.Name;
-            model.SurName = appuser.Surname;
-            model.Picture = appuser.Picture;
-            model.Email = appuser.Email;
-            return View(model);
+           
+           
+            return View(_mapper.Map<AppUserListDto>(appuser));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(AppUSerListViewModel model,IFormFile resim)
+        public async Task<IActionResult> Index(AppUserListDto model,IFormFile resim)
         {
             if (ModelState.IsValid)
             {
