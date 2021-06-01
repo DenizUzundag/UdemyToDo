@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.GorevDtos;
 using YSKProje.ToDo.Entities.Concrete;
-using YSKProje.ToDo.Web.Areas.Admin.Models;
-
 namespace YSKProje.ToDo.Web.Areas.Member.Controllers
 {
     [Authorize(Roles ="Member")]
@@ -32,8 +30,8 @@ namespace YSKProje.ToDo.Web.Areas.Member.Controllers
 
             TempData["Active"] = "gorev";
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            int toplamSayfa;
-          var gorevler= _mapper.Map<List<GorevListAllDto>>( _gorevService.GetirTumTablolarlaTamamlanmayan(out toplamSayfa,user.Id,aktifSayfa));
+
+            var gorevler = _mapper.Map<List<GorevListAllDto>>(_gorevService.GetirTumTablolarlaTamamlanmayan(out int toplamSayfa, user.Id, aktifSayfa));
 
             ViewBag.ToplamSayfa = toplamSayfa;
             ViewBag.AktifSayfa = aktifSayfa;

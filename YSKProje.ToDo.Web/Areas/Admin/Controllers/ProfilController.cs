@@ -4,26 +4,25 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.Entities.Concrete;
-using YSKProje.ToDo.Web.Areas.Admin.Models;
+using YSKProje.ToDo.Web.BaseControllers;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles ="Admin")]
-    public class ProfilController : Controller
+    public class ProfilController : BaseIdentityController
     {
-        private readonly UserManager<AppUser> _userManager;
+       
         private readonly IMapper _mapper;
 
-        public ProfilController(UserManager<AppUser> userManager,IMapper mapper)
+        public ProfilController(UserManager<AppUser> userManager,IMapper mapper):base(userManager)
         {
-            _userManager = userManager;
+
             _mapper = mapper;
         }
         public  async Task<IActionResult> Index()
@@ -31,7 +30,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             TempData["Active"] = "Profil";
         
            
-            return View(_mapper.Map<AppUserListDto>(await _userManager.FindByNameAsync(User.Identity.Name)));
+            return View(_mapper.Map<AppUserListDto>(await GetirGirisYapanKullanici()));
         }
 
         [HttpPost]
@@ -62,10 +61,7 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
                         TempData["Message"] = "Güncelleme işleminiz başarı ile gerçekleşti";
                         return RedirectToAction("Index");
                     }
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    HataEkle(result.Errors);
                 }
             
             

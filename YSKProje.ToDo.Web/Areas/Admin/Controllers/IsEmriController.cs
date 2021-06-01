@@ -10,7 +10,7 @@ using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.DTO.DTOs.GorevDtos;
 using YSKProje.ToDo.Entities.Concrete;
-using YSKProje.ToDo.Web.Areas.Admin.Models;
+
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
@@ -49,11 +49,10 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
             //ViewBag.ToplamSAyfa = (int)Math.Ceiling((double)_appUserService.GetirAdminOlmayanlar().Count / 3);//toplam sayfa
 
             ViewBag.Aranan = s;
-            int toplamSayfa;
             var gorev = _gorevService.GetirAciliyetileId(id);
 
 
-            var personeller =_mapper.Map<List<AppUserListDto>>(_appUserService.GetirAdminOlmayanlar(out toplamSayfa,s,sayfa));
+            var personeller =_mapper.Map<List<AppUserListDto>>(_appUserService.GetirAdminOlmayanlar(out int toplamSayfa,s,sayfa));
             ViewBag.ToplamSayfa = toplamSayfa;
             ViewBag.Personeller = personeller;
             
@@ -85,12 +84,14 @@ namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
         {
             TempData["Active"] = "isemri";
 
-            PersonelGorevlendirListDto personelGorevlendirModel = new PersonelGorevlendirListDto();
-            personelGorevlendirModel.AppUser= _mapper.Map<AppUserListDto>(_userManager.Users.FirstOrDefault(I => I.Id == model.PersonelId));
-            personelGorevlendirModel.Gorev = _mapper.Map<GorevListDto>(_gorevService.GetirAciliyetileId(model.GorevId));
+            PersonelGorevlendirListDto personelGorevlendirModel = new PersonelGorevlendirListDto
+            {
+                AppUser = _mapper.Map<AppUserListDto>(_userManager.Users.FirstOrDefault(I => I.Id == model.PersonelId)),
+                Gorev = _mapper.Map<GorevListDto>(_gorevService.GetirAciliyetileId(model.GorevId))
+            };
 
 
- 
+
 
 
             return View(personelGorevlendirModel);

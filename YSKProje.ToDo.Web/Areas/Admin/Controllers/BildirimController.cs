@@ -9,27 +9,27 @@ using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.BildirimDtos;
 using YSKProje.ToDo.Entities.Concrete;
-using YSKProje.ToDo.Web.Areas.Admin.Models;
+using YSKProje.ToDo.Web.BaseControllers;
 
 namespace YSKProje.ToDo.Web.Areas.Admin.Controllers
 {
     [Authorize(Roles ="Admin")]
     [Area("Admin")]
-    public class BildirimController : Controller
+    public class BildirimController : BaseIdentityController
     {
         private readonly IBildirimService _bildirimService;
-        private readonly UserManager<AppUser> _userManager;
+    
         private readonly IMapper _mapper;
-        public BildirimController(IBildirimService bildirimService, UserManager<AppUser> userManager, IMapper mapper)
+        public BildirimController(IBildirimService bildirimService, UserManager<AppUser> userManager, IMapper mapper):base(userManager)
         {
             _bildirimService = bildirimService;
-           _userManager = userManager;
+        
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "bildirim";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await GetirGirisYapanKullanici();
     
         
             return View(_mapper.Map<List<BildirimListDto>>(_bildirimService.GetirOkunmayanlar(user.Id)));
