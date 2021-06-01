@@ -9,25 +9,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using YSKProje.ToDo.DTO.DTOs.AppUserDtos;
 using YSKProje.ToDo.Entities.Concrete;
+using YSKProje.ToDo.Web.BaseControllers;
 
 namespace YSKProje.ToDo.Web.Member.Admin.Controllers
 {
     [Area("Member")]
     [Authorize(Roles ="Member")]
-    public class ProfilController : Controller
+    public class ProfilController : BaseIdentityController
     {
-        private readonly UserManager<AppUser> _userManager;
+       
         private readonly IMapper _mapper;
 
-        public ProfilController(UserManager<AppUser> userManager,IMapper mapper)
+        public ProfilController(UserManager<AppUser> userManager,IMapper mapper):base(userManager)
         {
-            _userManager = userManager;
+            
             _mapper = mapper;
         }
         public  async Task<IActionResult> Index()
         {
             TempData["Active"] = "Profil";
-           var appuser= await _userManager.FindByNameAsync(User.Identity.Name);
+            var appuser = GetirGirisYapanKullanici();
            
            
             return View(_mapper.Map<AppUserListDto>(appuser));
@@ -61,10 +62,7 @@ namespace YSKProje.ToDo.Web.Member.Admin.Controllers
                         TempData["Message"] = "Güncelleme işleminiz başarı ile gerçekleşti";
                         return RedirectToAction("Index");
                     }
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    HataEkle(result.Errors);
                 }
             
             

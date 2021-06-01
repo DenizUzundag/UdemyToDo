@@ -7,30 +7,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.Entities.Concrete;
+using YSKProje.ToDo.Web.BaseControllers;
 
 namespace YSKProje.ToDo.Web.Areas.Member.Controllers
 {
     [Area("Member")]
 
     [Authorize(Roles = "Member")]
-    public class HomeController : Controller
-    {
+    public class HomeController : BaseIdentityController
+    { 
         private readonly IRaporService _raporService;
-        private readonly UserManager<AppUser> _userManager;
+   
         private readonly IGorevService _gorevService;
         private readonly IBildirimService _bildirimService;
 
-        public HomeController(IRaporService raporService, UserManager<AppUser> userManager, IGorevService gorevService, IBildirimService bildirimService)
+        public HomeController(IRaporService raporService, UserManager<AppUser> userManager, IGorevService gorevService, IBildirimService bildirimService):base(userManager)
         {
             _raporService = raporService;
-            _userManager = userManager;
+        
             _gorevService = gorevService;
             _bildirimService = bildirimService;
         }
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "anasayfa";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await GetirGirisYapanKullanici();
             ViewBag.RaporSayisi = _raporService.GetirRaporSayisiileAppUserId(user.Id);
             ViewBag.TamamlananGorevSayisi = _gorevService.GetirGorevSayisiTamamlananileAppUserId(user.Id);
             ViewBag.TamamlanmayanGorevSaysii = _gorevService.GetirTamamlanmyanGorevSayisi(user.Id);

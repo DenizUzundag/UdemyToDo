@@ -10,31 +10,31 @@ using YSKProje.ToDo.Business.Interfaces;
 using YSKProje.ToDo.DTO.DTOs.GorevDtos;
 using YSKProje.ToDo.DTO.DTOs.RaporDtos;
 using YSKProje.ToDo.Entities.Concrete;
-
+using YSKProje.ToDo.Web.BaseControllers;
 
 namespace YSKProje.ToDo.Web.Areas.Member.Controllers
 {
     [Authorize(Roles ="Member")]
     [Area("Member")]
-    public class IsEmriController : Controller
+    public class IsEmriController : BaseIdentityController
     {
-        private readonly UserManager<AppUser> _userManager;
+      
         private readonly IGorevService _gorevService;
         private readonly IRaporService _raporService;
         private readonly IBildirimService _bildirimService;
         private readonly IMapper _mapper;
 
-        public IsEmriController(IGorevService gorevService ,IRaporService raporService, UserManager<AppUser> userManager, IBildirimService bildirimService,IMapper mapper)
+        public IsEmriController(IGorevService gorevService ,IRaporService raporService, UserManager<AppUser> userManager, IBildirimService bildirimService,IMapper mapper):base(userManager)
         {
             _gorevService = gorevService;
-            _userManager = userManager;
+         
             _raporService = raporService;
             _bildirimService = bildirimService;
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
-           var user =  await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await GetirGirisYapanKullanici();
             TempData["Active"] = "isemri";
           
          
@@ -69,7 +69,7 @@ namespace YSKProje.ToDo.Web.Areas.Member.Controllers
             }
 
            var adminUserList = await _userManager.GetUsersInRoleAsync("Admin");
-            var aktifKullanici = await _userManager.FindByNameAsync(User.Identity.Name);
+            var aktifKullanici = await GetirGirisYapanKullanici();
             foreach (var admin in adminUserList)
             {
                 _bildirimService.Kaydet(new Bildirim
@@ -126,7 +126,7 @@ namespace YSKProje.ToDo.Web.Areas.Member.Controllers
             _gorevService.Guncelle(guncellenecekGorev);
 
             var adminUserList = await _userManager.GetUsersInRoleAsync("Admin");
-            var aktifKullanici = await _userManager.FindByNameAsync(User.Identity.Name);
+            var aktifKullanici = await GetirGirisYapanKullanici();
             foreach (var admin in adminUserList)
             {
                 _bildirimService.Kaydet(new Bildirim
