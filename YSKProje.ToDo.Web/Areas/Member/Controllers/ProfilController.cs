@@ -29,7 +29,7 @@ namespace YSKProje.ToDo.Web.Member.Admin.Controllers
         public  async Task<IActionResult> Index()
         {
             TempData["Active"] = TempDataInfo.Profil;
-            var appuser = GetirGirisYapanKullanici();
+            var appuser = await GetirGirisYapanKullanici();
            
            
             return View(_mapper.Map<AppUserListDto>(appuser));

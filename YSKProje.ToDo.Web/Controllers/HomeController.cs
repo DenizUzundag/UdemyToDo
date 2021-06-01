@@ -30,7 +30,7 @@ namespace YSKProje.ToDo.Web.Controllers
             if(ModelState.IsValid)
             {
                 //user var mı yok mu
-                var user = await GetirGirisYapanKullanici();
+                var user = await _userManager.FindByNameAsync(model.UserName);
                 if(user != null)
                 {
                     //parola ile giriş kontolü

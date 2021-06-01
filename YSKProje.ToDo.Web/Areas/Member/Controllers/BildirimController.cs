@@ -30,7 +30,7 @@ namespace YSKProje.ToDo.Web.Areas.Member.Controllers
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = TempDataInfo.Bildirim;
-            var user = GetirGirisYapanKullanici();
+            var user = await GetirGirisYapanKullanici();
            
            
             return View(_mapper.Map<List<BildirimListDto>>(_bildirimService.GetirOkunmayanlar(user.Id)));
