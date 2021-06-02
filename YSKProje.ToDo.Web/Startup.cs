@@ -47,6 +47,7 @@ namespace YSKProje.ToDo.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePagesWithReExecute("/Home/StatusCode", "?code={0}");
             IdentityInitializer.SeedDate(userManager, roleManager).Wait();
             app.UseRouting();
             app.UseAuthentication();
